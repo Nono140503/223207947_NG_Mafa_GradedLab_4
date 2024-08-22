@@ -58,7 +58,7 @@ function HomeScreen({navigation}){
             menuItem: 'Chocolate Lava Cake',
             dietry: 'Vegetarian🌱',
             description: 'Rich chocolate cake with a gooey molten center, served warm with a scoop of vanilla ice cream.',
-            image: "https://www.foodnetwork.com/content/dam/images/food/fullset/2014/2/19/1/WU0701H_Molten-Chocolate-Cakes_s4x3.jpg",
+            image: "https://bakemesomesugar.com/wp-content/uploads/2021/06/lava-cake-recipe.jpg",
             price: "R40.90",
         },
         {
@@ -121,11 +121,12 @@ function HomeScreen({navigation}){
                 <Text></Text>
             </View>
         </ScrollView>
+      
+        </View>
         <BottomTabBar
         navigation={navigation} 
         currentScreen={currentScreen}
         onNavigate={handleNavigation}/>
-        </View>
         
             
 

@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
         borderTopWidth: 0.4,
         padding: '2%',
         position: 'absolute',
-        bottom: 100,
+        bottom: 0,
         width: '100%',
         backgroundColor: 'white',
     

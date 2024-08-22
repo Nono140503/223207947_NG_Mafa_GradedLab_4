@@ -123,7 +123,7 @@ function HomeScreen({navigation}){
         </ScrollView>
       
         </View>
-        <BottomTabBar
+          <BottomTabBar
         navigation={navigation} 
         currentScreen={currentScreen}
         onNavigate={handleNavigation}/>

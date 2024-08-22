@@ -4,7 +4,7 @@ import {View, StyleSheet, Text, Image, TouchableOpacity} from 'react-native';
 
 function WelcomeScreen({navigation}){
     const handleHome = ()=>{
-        navigation.navigate('Home Screen');
+        navigation.navigate('Form 1');
     }
     return (
         <>

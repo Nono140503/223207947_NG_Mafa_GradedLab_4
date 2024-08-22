@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { View, StyleSheet, Text, Image, TouchableOpacity, ImageBackground, Platform, Alert } from 'react-native';
 import BottomTabBar from '../../components/BottomTabBar';
 import Icon from 'react-native-vector-icons/Ionicons';
-
+import { UserContext } from '../../Global/useProfileNameAndEmail'; 
+import { UserAddressContext } from '../../Global/userProfileAddress';
 
 function ProfileScreen({ navigation }) {
     const [currentScreen, setCurrentScreen] = useState('Profile');
@@ -10,13 +11,15 @@ function ProfileScreen({ navigation }) {
         setCurrentScreen(screen);
         navigation.navigate(screen);
     };
-
+const handleForm1 =()=>{
+    navigation.navigate('Form 1');
+}
     const handleLogOut = () => {
         navigation.navigate('Welcome');
     };
 
-
-
+const {userData} = useContext(UserContext);
+const {userAddress} = useContext(UserAddressContext)
     return (
         <>
             <View style={styles.container}>
@@ -31,15 +34,15 @@ function ProfileScreen({ navigation }) {
                         <View style={styles.details}>
                             <View style={styles.card}>
                                 <View style={styles.name_cont}>
-                                    <Text style={styles.name}>Name: </Text>
-                                    <Text style={styles.name_detail}>John Doe</Text>
+                                    <Text style={styles.name}>Name:</Text>
+                                    < Text style={styles.name_detail}>{userData.name}</Text>
                                 </View>
                                 
                             </View>
                             <View style={styles.card}>
                                 <View style={styles.email_cont}>
                                 <Text style={styles.email}>Email:</Text>
-                                <Text style={styles.email_detail}>john.doe@example.com</Text>
+                                <Text style={styles.email_detail}>{userData.email}</Text>
                                 </View>
                             
                             </View>
@@ -50,10 +53,10 @@ function ProfileScreen({ navigation }) {
                                         <Text style={styles.address_label}>Address: </Text>
                                         </View>
                                     <View style={styles.address}>
-                                        <Text style={styles.detail}>123 Main St</Text>
-                                        <Text style={styles.detail}>Anytown</Text>
-                                        <Text style={styles.detail}>0015</Text>
-                                        <Text style={styles.detail}>USA</Text>
+                                        <Text style={styles.detail}>{userAddress.streetAddress}</Text>
+                                        <Text style={styles.detail}>{userAddress.city}</Text>
+                                        <Text style={styles.detail}>{userAddress.state}</Text>
+                                        <Text style={styles.detail}>{userAddress.zipCode}</Text>
                                     </View>
                                     
                                
@@ -64,8 +67,8 @@ function ProfileScreen({ navigation }) {
                             
                             
                         </View>
-                        <TouchableOpacity style={styles.delete}>
-                            <Text style={styles.delete_text}>Delete Account</Text>
+                        <TouchableOpacity style={styles.delete} onPress={handleForm1}>
+                            <Text style={styles.delete_text}>Form 1</Text>
                             <Icon name='trash-outline' size={20} style={styles.delete_icon} />
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.logout} onPress={handleLogOut}>

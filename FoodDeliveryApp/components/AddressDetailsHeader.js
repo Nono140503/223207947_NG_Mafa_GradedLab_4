@@ -2,18 +2,15 @@ import React from "react";
 import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import Icon  from "react-native-vector-icons/Ionicons";
 
-function CartHeader({navigation}){
+function AddressDetailsHeader({navigation}){
     const handleBack = ()=>{
-        navigation.navigate('Home Screen');
+        navigation.navigate('Profile');
     }
     
     return(
         <>
         <View style={styles.cont}>
-            <TouchableOpacity style={styles.icon_cont} onPress={handleBack}>
-              <Icon name='chevron-back-outline' size={25} style={styles.icon}/>
-            </TouchableOpacity>
-            <Text style={styles.text}>My Cart</Text>
+            <Text style={styles.text}>Address Details</Text>
         </View>
         </>
     )
@@ -28,19 +25,13 @@ const styles = StyleSheet.create({
         borderBottomColor: 'grey',
         borderBottomWidth: 0.4,
     },
-    icon_cont:{
-        padding: 10,
-    },
-    icon:{
-        marginTop: 15,
-        color: '#2A65BC'
-    },
+   
     text:{
-        marginLeft: 90,
+        marginLeft: 100,
         marginTop: 30,
         fontSize: 20,
         fontWeight: 'bold',
         color: '#2A65BC'
     },
 })
-export default CartHeader
+export default AddressDetailsHeader

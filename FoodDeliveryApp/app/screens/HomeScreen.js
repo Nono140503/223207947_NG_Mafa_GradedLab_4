@@ -7,13 +7,21 @@ import { MenuContext } from '../../Global/userMenu';
 
 function HomeScreen({navigation}){
     const [currentScreen, setCurrentScreen] = useState('Home Screen');
-    const [cart, setCart] = useState('');
 
     const handleNavigation = (screen) => {
         setCurrentScreen(screen);
         navigation.navigate(screen);
     };
+
+    const handleAddToCart = (item) =>{
+        setCart([...cart, item]);
+        console.log(item);
+        console.log(cart)
+        
+    }
+
     const {menu} = useContext(MenuContext);
+    const{cart, setCart} = useContext(MenuContext)
     
     return(
         <>  
@@ -44,7 +52,7 @@ function HomeScreen({navigation}){
                                         <Text style={styles.price}>Price:</Text>
                                         <Text style={styles.itemPrice}>{item.price}</Text>
                                     </View>
-                                    <TouchableOpacity style={styles.addButton}>
+                                    <TouchableOpacity style={styles.addButton} onPress={() => handleAddToCart(item)}>
                                         <Text style={styles.buttonText}>Add to Cart</Text>
                                         <Icon name='cart-outline' size={20} style={styles.buttonIcon}/>
                                     </TouchableOpacity>

@@ -14,6 +14,7 @@ import Form_3 from './app/screens/Form3';
 import { UserProvider  } from './Global/useProfileNameAndEmail';
 import { UserAddressProvider } from './Global/userProfileAddress';
 import { MenuProvider } from './Global/userMenu';
+import { ThemeProvider } from './Global/ThemeContext';
 
 
 const Stack = createStackNavigator();
@@ -21,7 +22,8 @@ export default function App() {
   const [userData, setUserData] = useState('Nombali ')
   return (
     
-    <UserProvider >
+    <ThemeProvider>
+       <UserProvider >
       <UserAddressProvider>
         <MenuProvider>
         <NavigationContainer>
@@ -41,6 +43,8 @@ export default function App() {
         
     </UserProvider>
     
+    </ThemeProvider>
+   
   );
 }
 

@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { View, StyleSheet, Text, Image, TouchableOpacity, ImageBackground, Platform, Alert } from 'react-native';
+import React, { useState, useContext } from 'react';
+import { View, StyleSheet, Text, Image, TouchableOpacity } from 'react-native';
 import BottomTabBar from '../../components/BottomTabBar';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { UserContext } from '../../Global/useProfileNameAndEmail'; 
 import { UserAddressContext } from '../../Global/userProfileAddress';
+import { useTheme, ThemeContext } from '../../Global/ThemeContext'; // Adjust the path accordingly
 
 function ProfileScreen({ navigation }) {
     const [currentScreen, setCurrentScreen] = useState('Profile');
@@ -11,76 +12,77 @@ function ProfileScreen({ navigation }) {
         setCurrentScreen(screen);
         navigation.navigate(screen);
     };
-const handleForm1 =()=>{
-    navigation.navigate('Form 1');
-}
+
+    const handleForm1 = () => {
+        navigation.navigate('Form 1');
+    };
+
     const handleLogOut = () => {
         navigation.navigate('Welcome');
     };
 
-const {userData} = useContext(UserContext);
-const {userAddress} = useContext(UserAddressContext)
+    const { userData } = useContext(UserContext);
+    const { userAddress } = useContext(UserAddressContext);
+    const { theme, toggleTheme } = useTheme();
+
+    const backgroundColor = theme === 'dark' ? '#0B0B0C' : '#5170FE';
+    const cardBackgroundColor = theme === 'dark' ? '#1F1F1F' : 'white';
+    const textColor = theme === 'dark' ? '#FFFFFF' : '#000000';
+    
+
     return (
         <>
-            <View style={styles.container}>
-                    <View style={styles.overlay}>
-                        <View style={styles.profile_cont}>
-                            <Image 
-                                source= {require('../../assets/blank-profile-pic.png') }
-                                style={styles.profile_pic} 
-                            />
-                        </View>
-                        
-                        <View style={styles.details}>
-                            <View style={styles.card}>
-                                <View style={styles.name_cont}>
-                                    <Text style={styles.name}>Name:</Text>
-                                    < Text style={styles.name_detail}>{userData.name}</Text>
-                                </View>
-                                
-                            </View>
-                            <View style={styles.card}>
-                                <View style={styles.email_cont}>
-                                <Text style={styles.email}>Email:</Text>
-                                <Text style={styles.email_detail}>{userData.email}</Text>
-                                </View>
-                            
-                            </View>
-
-                            <View style={styles.card}>
-                                <View style={styles.address_info}>
-                                    <View>
-                                        <Text style={styles.address_label}>Address: </Text>
-                                        </View>
-                                    <View style={styles.address}>
-                                        <Text style={styles.detail}>{userAddress.streetAddress}</Text>
-                                        <Text style={styles.detail}>{userAddress.city}</Text>
-                                        <Text style={styles.detail}>{userAddress.state}</Text>
-                                        <Text style={styles.detail}>{userAddress.zipCode}</Text>
-                                    </View>
-                                    
-                               
-                                </View>
-                                
-                            </View>
-                            
-                            
-                            
-                        </View>
-                        <TouchableOpacity style={styles.delete} onPress={handleForm1}>
-                            <Text style={styles.delete_text}>Form 1</Text>
-                            <Icon name='trash-outline' size={20} style={styles.delete_icon} />
-                        </TouchableOpacity>
-                        <TouchableOpacity style={styles.logout} onPress={handleLogOut}>
-                            <Text style={styles.logout_text}>Log Out</Text>
-                            <Icon name='exit-outline' size={20} style={styles.log_icon} />
-                        </TouchableOpacity>
+            <View style={[styles.container, { backgroundColor }]}>
+                <View style={styles.overlay}>
+                    <View style={styles.profile_cont}>
+                        <Image 
+                            source={require('../../assets/blank-profile-pic.png')}
+                            style={styles.profile_pic} 
+                        />
                     </View>
+                    
+                    <View style={styles.details}>
+                        <View style={[styles.card, { backgroundColor: cardBackgroundColor }]}>
+                            <View style={styles.name_cont}>
+                                <Text style={[styles.name, { color: '#2A65BC' }]}>Name:</Text>
+                                <Text style={[styles.name_detail, { color: textColor }]}>{userData.name}</Text>
+                            </View>
+                            
+                        </View>
+                        <View style={[styles.card, { backgroundColor: cardBackgroundColor }]}>
+                            <View style={styles.email_cont}>
+                                <Text style={[styles.email, { color: '#2A65BC' }]}>Email:</Text>
+                                <Text style={[styles.email_detail, { color: textColor }]}>{userData.email}</Text>
+                            </View>
+                        
+                        </View>
+
+                        <View style={[styles.card, { backgroundColor: cardBackgroundColor }]}>
+                            <View style={styles.address_info}>
+                                <View>
+                                    <Text style={[styles.address_label, { color: '#2A65BC' }]}>Address:</Text>
+                                </View>
+                                <View style={styles.address}>
+                                    <Text style={[styles.detail, { color: textColor }]}>{userAddress.streetAddress}</Text>
+                                    <Text style={[styles.detail, { color: textColor }]}>{userAddress.city}</Text>
+                                    <Text style={[styles.detail, { color: textColor }]}>{userAddress.state}</Text>
+                                    <Text style={[styles.detail, { color: textColor }]}>{userAddress.zipCode}</Text>
+                                </View>
+                            </View>
+                        </View>
+                    </View>
+
+
+
+                    <TouchableOpacity style={styles.toggleButton} onPress={toggleTheme}>
+                        <Text style={styles.toggleButtonText}>{theme === 'dark' ? 'Light Theme' : 'Dark Theme'}</Text>
+                    </TouchableOpacity>
+
+                </View>
                 <BottomTabBar 
                     navigation={navigation} 
                     currentScreen={currentScreen}
                     onNavigate={handleNavigation} 
-                    
                 />
             </View>
         </>
@@ -91,23 +93,21 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        backgroundColor: '#5170FE',
     },
-    detail:{
-       fontSize: 16,
+    detail: {
+        fontSize: 16,
     },
-    email_detail:{
+    email_detail: {
         fontSize: 16,
         marginLeft: 10,
         marginTop: 7,
-     },
-     name_detail:{
+    },
+    name_detail: {
         fontSize: 16,
         marginLeft: 10,
         marginTop: 2,
-     },
-    card:{
-        backgroundColor:'white',
+    },
+    card: {
         height: 'auto',
         width: '95%',
         padding: 15,
@@ -118,24 +118,23 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.5, 
         shadowRadius: 3.5,
     },
-    name_cont:{
+    name_cont: {
         display: 'flex',
         flexDirection: 'row',
     },
-    email_cont:{
+    email_cont: {
         display: 'flex',
         flexDirection: 'row',
     },
-    address_label:{
+    address_label: {
         fontSize: 18,
-        color: '#2A65BC',
         fontWeight: 'bold',
     },
-    address_info:{
+    address_info: {
         display: 'flex',
         flexDirection: 'row',
     },
-    address:{
+    address: {
         marginLeft: 16,
         width: '50%'
     },
@@ -144,11 +143,6 @@ const styles = StyleSheet.create({
         padding: '5%',
         width: '100%',
         height: '100%',
-    },
-    background: {
-        width: '100%',
-        height: '100%',
-        alignItems: 'center',
     },
     profile_cont: {
         marginTop: '20%',
@@ -180,20 +174,17 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     name: {
-        color: '#2A65BC',
         fontSize: 18,
         fontWeight: 'bold',
     },
     email: {
         marginTop: '2%',
         fontSize: 18,
-        color: '#2A65BC',
         fontWeight: 'bold',
     },
     delete: {
         flexDirection: 'row',
         marginTop: '5%',
-        backgroundColor: 'red',
         padding: '5%',
         borderRadius: 10,
         shadowColor: 'rgba(0, 0, 0, 0.3)', 
@@ -202,18 +193,15 @@ const styles = StyleSheet.create({
         shadowRadius: 3.5,
     },
     delete_icon: {
-        color: 'white',
         marginLeft: '2%',
         bottom: '1%',
     },
     delete_text: {
-        color: 'white',
         fontSize: 16,
         fontWeight: 'bold',
     },
     logout: {
         flexDirection: 'row',
-        backgroundColor: 'white',
         padding: '5%',
         borderRadius: 10,
         shadowColor: 'rgba(0, 0, 0, 0.3)', 
@@ -224,15 +212,25 @@ const styles = StyleSheet.create({
         width: '50%',
     },
     logout_text: {
-        color: 'red',
         marginLeft: '18%',
         fontWeight: 'bold',
         fontSize: 16,
     },
     log_icon: {
-        color: 'red',
         marginLeft: '3%',
+    },
+    toggleButton: {
+        marginTop: '5%',
+        padding: '3%',
+        borderRadius: 10,
+        backgroundColor: '#2A65BC',
+        alignItems: 'center',
+    },
+    toggleButtonText: {
+        color: 'white',
+        fontWeight: 'bold',
+        fontSize: 16,
     },
 });
 
-export default  ProfileScreen;
+export default ProfileScreen;

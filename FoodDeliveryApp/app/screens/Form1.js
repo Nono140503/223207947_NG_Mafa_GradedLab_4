@@ -16,27 +16,27 @@ function Form_1({navigation}){
         navigation.navigate(screen);
     };
     
-    // const validateForm = () => {
+    const validateForm = () => {
         
-    //     if (!name) {
-    //         Alert.alert('Name is required');
-    //         return false;
-    //     }
-    //     if (!email || !email.includes('@')) {
-    //         Alert.alert('Please enter avalid email is required');
-    //         return false;
-    //     }
-    //     if (!number || number.length !== 10 || isNaN(number)) {
-    //         Alert.alert('Phone Number must be a 10-digit number');
-    //         return false;
-    //     }
-    //     return true;
-    // };
+        if (!name) {
+            Alert.alert('Name is required');
+            return false;
+        }
+        if (!email || !email.includes('@')) {
+            Alert.alert('Please enter avalid email is required');
+            return false;
+        }
+        if (!number || number.length !== 10 || isNaN(number)) {
+            Alert.alert('Phone Number must be a 10-digit number');
+            return false;
+        }
+        return true;
+    };
     const handleSave = () =>{
-        // if(validateForm()){
+        if(validateForm()){
             setUserData({name, email});
             Alert.alert('Successfully saved.')
-        // }
+        }
            
         
     }
@@ -70,6 +70,7 @@ function Form_1({navigation}){
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: '#A1C1E1',
         
     },
     buttonText:{

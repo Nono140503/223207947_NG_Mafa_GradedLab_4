@@ -17,31 +17,31 @@ function Form_2({navigation}){
         navigation.navigate(screen);
     }; 
     
-    // const validateForm = () => {
-    //     if (!streetAddress) {
-    //         Alert.alert('Street address is required');
-    //         return false;
-    //     }
-    //     if (!city) {
-    //         Alert.alert('City is required');
-    //         return false;
-    //     }
-    //     if (!state) {
-    //         Alert.alert('State is required');
-    //         return false;
-    //     }
-    //     if (!zipCode || zipCode.length !== 4 || isNaN(zipCode)) {
-    //         Alert.alert('Zip Code must be a 4-digit number');
-    //         return false;
-    //     }
-    //     return true;
-    // };
+    const validateForm = () => {
+        if (!streetAddress) {
+            Alert.alert('Street address is required');
+            return false;
+        }
+        if (!city) {
+            Alert.alert('City is required');
+            return false;
+        }
+        if (!state) {
+            Alert.alert('State is required');
+            return false;
+        }
+        if (!zipCode || zipCode.length !== 4 || isNaN(zipCode)) {
+            Alert.alert('Zip Code must be a 4-digit number');
+            return false;
+        }
+        return true;
+    };
     const handleNext = () =>{
-        // if (validateForm()) {
+        if (validateForm()) {
             setAddress({streetAddress, city, state, zipCode});
             Alert.alert('Successfully saved.')
             navigation.navigate('Form 3');
-        // }
+        }
     }
 
     return (
@@ -72,6 +72,7 @@ function Form_2({navigation}){
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: '#A1C1E1'
     },
     buttonText:{
         color:'white',

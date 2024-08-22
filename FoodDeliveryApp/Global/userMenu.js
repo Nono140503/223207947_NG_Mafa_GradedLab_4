@@ -87,9 +87,13 @@ const MenuProvider = ({ children }) => {
             count: 1,
         },
     ]);
+    const [cart, setCart] =useState([
+
+    ]);
+    const [total, setTotal] = useState(0);
 
     return (
-        <MenuContext.Provider value={{ menu, setMenu }}>
+        <MenuContext.Provider value={{ menu, setMenu , cart, setCart, total, setTotal}}>
             {children}
         </MenuContext.Provider>
     );

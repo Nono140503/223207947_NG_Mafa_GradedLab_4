@@ -40,30 +40,30 @@ function Form_3({navigation}) {
     };
 
     const handleNext = () => {
-        // if (validateForm()) {
+        if (validateForm()) {
             navigation.navigate('Home Screen');
-        // }
+        }
     };
 
-    // const validateForm = () => {
-    //     if (cardNumber.length !== 16 || isNaN(cardNumber)) {
-    //         Alert.alert('Validation Error', 'Card Number must be 16 digits');
-    //         return false;
-    //     }
-    //     if (month < 1 || month > 12) {
-    //         Alert.alert('Validation Error', 'Invalid month');
-    //         return false;
-    //     }
-    //     if (year.length !== 4 || isNaN(year)) {
-    //         Alert.alert('Validation Error', 'Year must be 4 digits');
-    //         return false;
-    //     }
-    //     if (ccv.length !== 3 || isNaN(ccv)) {
-    //         Alert.alert('Validation Error', 'CCV must be 3 digits');
-    //         return false;
-    //     }
-    //     return true;
-    // };
+    const validateForm = () => {
+        if (cardNumber.length !== 16 || isNaN(cardNumber)) {
+            Alert.alert('Validation Error', 'Card Number must be 16 digits');
+            return false;
+        }
+        if (month < 1 || month > 12) {
+            Alert.alert('Validation Error', 'Invalid month');
+            return false;
+        }
+        if (year.length !== 4 || isNaN(year)) {
+            Alert.alert('Validation Error', 'Year must be 4 digits');
+            return false;
+        }
+        if (ccv.length !== 3 || isNaN(ccv)) {
+            Alert.alert('Validation Error', 'CCV must be 3 digits');
+            return false;
+        }
+        return true;
+    };
 
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -101,6 +101,7 @@ function Form_3({navigation}) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: '#A1C1E1'
     },
     buttonText:{
         color: 'white',
